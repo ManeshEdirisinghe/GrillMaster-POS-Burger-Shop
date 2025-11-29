@@ -202,28 +202,7 @@ function deleteCustomer(id) {
     updateCustomerSelect();
 }
 
-function renderProductsManagement() {
-    const grid = document.getElementById('productsManagementGrid');
-    if (products.length === 0) {
-        grid.innerHTML = '<p class="empty-orders-message">No products yet</p>';
-        return;
-    }
 
-    grid.innerHTML = products.map(p => `
-        <div class="item-card product-management-card">
-            <div class="product-management-image-wrapper">
-                <img src="${p.image}" alt="${p.name}" class="product-management-image">
-            </div>
-            <h3 class="item-name">${p.name}</h3>
-            <p class="product-category">${p.category}</p>
-            <p class="product-management-price">$${p.price.toFixed(2)}</p>
-            <div class="product-management-actions">
-                <button class="icon-btn" onclick="openModal('product', ${p.id})">✏️</button>
-                <button class="icon-btn" onclick="deleteProduct(${p.id})">🗑️</button>
-            </div>
-        </div>
-    `).join('');
-}
 
 function saveProduct() {
     const name = document.getElementById('productName').value.trim();

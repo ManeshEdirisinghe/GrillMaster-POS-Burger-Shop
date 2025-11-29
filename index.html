@@ -182,10 +182,35 @@
                 `).join('');
             });
         }
+        function renderProductsManagement() {
+            const grid = document.getElementById('productsManagementGrid');
 
+            if (!grid) return;
+
+            if (products.length === 0) {
+                grid.innerHTML = '<p class="empty-orders-message">No products yet</p>';
+                return;
+            }
+
+            grid.innerHTML = products.map(product => `
+        <div class="item-card product-management-card">
+
+            <h3 class="item-name">${product.name}</h3>
+            <p class="product-category">${product.category}</p>
+            <p class="product-management-price">$${product.price.toFixed(2)}</p>
+
+            <div class="product-management-actions">
+                <button class="icon-btn" onclick="openModal('product', ${product.id})">✏️</button>
+                <button class="icon-btn" onclick="deleteProduct(${product.id})">🗑️</button>
+            </div>
+
+        </div>
+    `).join('');
+        }
+        renderProductsManagement();
         renderProducts();
 
-        
+
     </script>
 
     <script src="js/app.js"></script>
