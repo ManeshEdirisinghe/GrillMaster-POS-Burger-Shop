@@ -20,15 +20,16 @@ function saveData() {
 }
 
 function init() {
-    loadData();           // products now has defaultProducts if localStorage empty
+    loadData();
     setupEventListeners();
-    renderProducts();     // now products exist
+    renderProducts();
     renderCustomers();
     renderProductsManagement();
     renderOrders();
     updateCustomerSelect();
     updateCart();
 }
+
 function setupEventListeners() {
     document.getElementById('mobileMenuBtn').addEventListener('click', () => {
         document.getElementById('mainNav').classList.toggle('active');
@@ -57,6 +58,7 @@ function setupEventListeners() {
         if (e.target.id === 'modal') closeModal();
     });
 }
+
 function switchTab(tabName) {
     document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
     document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
@@ -66,63 +68,7 @@ function switchTab(tabName) {
 
     document.getElementById('mainNav').classList.remove('active');
 }
-function renderProductsManagement() {
-    const grid = document.getElementById('productsManagementGrid');
-    if (products.length === 0) {
-        grid.innerHTML = '<p class="empty-orders-message">No products yet</p>';
-        return;
-    }
 
-    grid.innerHTML = products.map(p => `
-        <div class="item-card product-management-card">
-            <div class="product-management-image-wrapper">
-                <img src="${p.image}" alt="${p.name}" class="product-management-image">
-            </div>
-            <h3 class="item-name">${p.name}</h3>
-            <p class="product-category">${p.category}</p>
-            <p class="product-management-price">$${p.price.toFixed(2)}</p>
-            <div class="product-management-actions">
-                <button class="icon-btn" onclick="openModal('product', ${p.id})">✏️</button>
-                <button class="icon-btn" onclick="deleteProduct(${p.id})">🗑️</button>
-            </div>
-        </div>
-    `).join('');
-}
-
-function saveProduct() {
-    const name = document.getElementById('productName').value.trim();
-    const category = document.getElementById('productCategory').value;
-    const price = parseFloat(document.getElementById('productPrice').value);
-    const imagePath = document.getElementById('productImagePath').value.trim();
-    const imageData = document.getElementById('productImageData').value;
-    if (!name || !category || !price) return alert('Please fill all required fields');
-
-    const product = {
-        id: editingItem?.id || Date.now(),
-        name,
-        category,
-        price,
-        image: imageData || imagePath
-    };
-
-    if (editingItem) {
-        const index = products.findIndex(p => p.id === editingItem.id);
-        products[index] = product;
-    } else products.push(product);
-
-    saveData();
-    renderProducts();
-    renderProductsManagement();
-    closeModal();
-}
-
-function deleteProduct(id) {
-    if (!confirm('Are you sure?')) return;
-    products = products.filter(p => p.id !== id);
-    saveData();
-    renderProducts();
-    renderProductsManagement();
-}
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -256,6 +202,64 @@ function deleteCustomer(id) {
     updateCustomerSelect();
 }
 
+function renderProductsManagement() {
+    const grid = document.getElementById('productsManagementGrid');
+    if (products.length === 0) {
+        grid.innerHTML = '<p class="empty-orders-message">No products yet</p>';
+        return;
+    }
+
+    grid.innerHTML = products.map(p => `
+        <div class="item-card product-management-card">
+            <div class="product-management-image-wrapper">
+                <img src="${p.image}" alt="${p.name}" class="product-management-image">
+            </div>
+            <h3 class="item-name">${p.name}</h3>
+            <p class="product-category">${p.category}</p>
+            <p class="product-management-price">$${p.price.toFixed(2)}</p>
+            <div class="product-management-actions">
+                <button class="icon-btn" onclick="openModal('product', ${p.id})">✏️</button>
+                <button class="icon-btn" onclick="deleteProduct(${p.id})">🗑️</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function saveProduct() {
+    const name = document.getElementById('productName').value.trim();
+    const category = document.getElementById('productCategory').value;
+    const price = parseFloat(document.getElementById('productPrice').value);
+    const imagePath = document.getElementById('productImagePath').value.trim();
+    const imageData = document.getElementById('productImageData').value;
+    if (!name || !category || !price) return alert('Please fill all required fields');
+
+    const product = {
+        id: editingItem?.id || Date.now(),
+        name,
+        category,
+        price,
+        image: imageData || imagePath
+    };
+
+    if (editingItem) {
+        const index = products.findIndex(p => p.id === editingItem.id);
+        products[index] = product;
+    } else products.push(product);
+
+    saveData();
+    renderProducts();
+    renderProductsManagement();
+    closeModal();
+}
+
+function deleteProduct(id) {
+    if (!confirm('Are you sure?')) return;
+    products = products.filter(p => p.id !== id);
+    saveData();
+    renderProducts();
+    renderProductsManagement();
+}
+
 function renderOrders() {
     const ordersList = document.getElementById('ordersList');
     if (orders.length === 0) {
@@ -277,7 +281,7 @@ function renderOrders() {
                 </div>
             </div>
             <div class="order-items">
-                ${order.items.map(item => `<div class="order-item">${item.name} x${item.quantity} - $${(item.price*item.quantity).toFixed(2)}</div>`).join('')}
+                ${order.items.map(item => `<div class="order-item">${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}</div>`).join('')}
             </div>
         </div>
     `).join('');
@@ -354,7 +358,7 @@ function closeModal() {
 
 function loadData() {
     const savedProducts = localStorage.getItem('grillmaster_products');
-    products = savedProducts ? JSON.parse(savedProducts) : [...defaultProducts]; // <-- important
+    products = savedProducts ? JSON.parse(savedProducts) : [...defaultProducts];
 }
 
 document.addEventListener('DOMContentLoaded', init);
