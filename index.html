@@ -151,6 +151,48 @@
         </div>
     </div>
 
+    <script>
+        const defaultProducts = [
+            { id: 1, name: 'Classic Burger', category: 'Burgers', price: 8.99, image: 'images/1.jpg' },
+            { id: 2, name: 'Cheese Burger', category: 'Burgers', price: 9.99, image: 'images/2.jpg' },
+            { id: 3, name: 'Beef Burger', category: 'Burgers', price: 17.99, image: 'images/12.jpeg' },
+            { id: 4, name: 'Bacon Burger', category: 'Burgers', price: 11.99, image: 'images/4.jpg' },
+            { id: 5, name: 'Regular Fries', category: 'Fries', price: 3.99, image: 'images/5.png' },
+            { id: 6, name: 'Large Fries', category: 'Fries', price: 4.99, image: 'images/6.png' },
+            { id: 7, name: 'Curly Fries', category: 'Fries', price: 5.49, image: 'images/7.png' },
+            { id: 8, name: 'Cola', category: 'Drinks', price: 2.49, image: 'images/8.jpg' },
+            { id: 9, name: 'Lemonade', category: 'Drinks', price: 2.99, image: 'images/9.jpg' },
+            { id: 10, name: 'Milkshake', category: 'Drinks', price: 4.99, image: 'images/10.jpg' },
+        ];
+
+        function renderProducts() {
+            const categories = ['Burgers', 'Fries', 'Drinks'];
+
+            categories.forEach(category => {
+                const gridId = category.toLowerCase() + 'Grid';
+                const grid = document.getElementById(gridId);
+
+                const categoryProducts = defaultProducts.filter(p => p.category === category);
+
+                grid.innerHTML = categoryProducts.map(product => `
+                    <button class="product-card" onclick="addToCart(${product.id})">
+                        <div class="product-image-wrapper">
+                            <img src="${product.image}" 
+                                 alt="${product.name}" 
+                                 class="product-image"
+                                 onerror="this.style.display='none';">
+                        </div>
+                        <h4 class="product-name">${product.name}</h4>
+                        <p class="product-price">$${product.price.toFixed(2)}</p>
+                    </button>
+                `).join('');
+            });
+        }
+
+        // Render on page load
+        //renderProducts();
+    </script>
+
 
     <style src="js/app.js"></style>
 </body>
