@@ -25,6 +25,91 @@
             </div>
         </div>
     </header>
+     <nav class="nav" id="mainNav">
+        <div class="container">
+            <div class="nav-links">
+                <button class="nav-link active" data-tab="pos">
+                    <span class="nav-icon">🛒</span>
+                    <span>Point of Sale</span>
+                </button>
+                <button class="nav-link" data-tab="customers">
+                    <span class="nav-icon">👥</span>
+                    <span>Customers</span>
+                </button>
+                <button class="nav-link" data-tab="products">
+                    <span class="nav-icon">📦</span>
+                    <span>Products</span>
+                </button>
+                <button class="nav-link" data-tab="orders">
+                    <span class="nav-icon">🧾</span>
+                    <span>Orders</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content container">
+        <!-- POS Tab -->
+        <div class="tab-content active" id="posTab">
+            <div class="pos-layout">
+                <!-- Products Section -->
+                <div class="products-section">
+                    <div class="card">
+                        <h2 class="section-title">Menu Items</h2>
+
+                        <div class="category-section">
+                            <h3 class="category-title">Burgers</h3>
+                            <div class="products-grid" id="burgersGrid"></div>
+                        </div>
+
+                        <div class="category-section">
+                            <h3 class="category-title">Fries</h3>
+                            <div class="products-grid" id="friesGrid"></div>
+                        </div>
+
+                        <div class="category-section">
+                            <h3 class="category-title">Drinks</h3>
+                            <div class="products-grid" id="drinksGrid"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Section -->
+                <div class="cart-section">
+                    <div class="card cart-card">
+                        <h2 class="section-title">
+                            <span class="cart-icon">🛒</span> Order Cart
+                        </h2>
+
+                        <!-- Customer Selection -->
+                        <div class="customer-select-wrapper">
+                            <label class="input-label">Select Customer</label>
+                            <select id="customerSelect" class="select-input">
+                                <option value="">-- Choose Customer --</option>
+                            </select>
+                        </div>
+
+                        <!-- Cart Items -->
+                        <div class="cart-items" id="cartItems">
+                            <p class="empty-cart-message">Cart is empty</p>
+                        </div>
+
+                        <!-- Total -->
+                        <div class="cart-total">
+                            <span>Total:</span>
+                            <span class="total-amount" id="totalAmount">$0.00</span>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="cart-actions">
+                            <button class="btn btn-primary" id="placeOrderBtn">Place Order</button>
+                            <button class="btn btn-secondary" id="clearCartBtn">Clear Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <style src="js/app.js"></style>
 </body>
