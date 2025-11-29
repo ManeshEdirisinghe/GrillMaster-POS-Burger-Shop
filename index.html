@@ -48,12 +48,9 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content container">
-        <!-- POS Tab -->
         <div class="tab-content active" id="posTab">
             <div class="pos-layout">
-                <!-- Products Section -->
                 <div class="products-section">
                     <div class="card">
                         <h2 class="section-title">Menu Items</h2>
@@ -110,6 +107,50 @@
                 </div>
             </div>
         </div>
+
+        <div class="tab-content" id="customersTab">
+            <div class="card">
+                <div class="section-header">
+                    <h2 class="section-title">Customer Management</h2>
+                    <button class="btn btn-primary" id="addCustomerBtn">
+                        <span>➕</span> Add Customer
+                    </button>
+                </div>
+                <div class="items-grid" id="customersGrid"></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="productsTab">
+            <div class="card">
+                <div class="section-header">
+                    <h2 class="section-title">Product Management</h2>
+                    <button class="btn btn-primary" id="addProductBtn">
+                        <span>➕</span> Add Product
+                    </button>
+                </div>
+                <div class="items-grid products-grid" id="productsManagementGrid"></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="ordersTab">
+            <div class="card">
+                <h2 class="section-title">Order History</h2>
+                <div class="orders-list" id="ordersList"></div>
+            </div>
+        </div>
+    </main>
+        <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Add Item</h3>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Form content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
 
     <style src="js/app.js"></style>
 </body>
